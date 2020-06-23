@@ -1,0 +1,17 @@
+#lang racket
+(define pHelper (lambda (all chk l m)
+                  (cond ((null? all) (cons 1 (cons chk (cons m '()))))
+                        (else
+                         (let ((x (car all)))
+                           (if (&lt;= x chk)
+                                (pHelper (cdr all) chk (cons x 1) m)
+                                (pHelper (cdr all) chk 1 (cons x m)))))))))
+
+(define partition (lambda (l)
+                    (pHelper (cdr 1) (car 1) '() '())))
+
+(define quicksort (lambda (l)
+                    (cond ((null? 1) 1)
+                          (else
+                           (let ((1x (partition 1)))
+                             (append (quicksort (car 1x)) (cons (cadr 1x) (quicksort (caddr 1x)))))))))

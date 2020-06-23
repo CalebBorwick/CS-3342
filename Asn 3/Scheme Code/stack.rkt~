@@ -1,0 +1,40 @@
+#lang racket
+(define make-stack
+  (lambda ()
+    (let ((stk '()))
+      (lambda (message . args)
+        (case message
+
+          ((empty?) (null? stk))
+
+          ((push!) (set! stk (cons (car args) stk)))
+          ((top) (if (null? stk)
+                     (error "empty stack: cannot get the top.")
+                     (car stk)))
+          ((pop!) (if (null? stk)
+                      (error "empty stack: cannot pop")
+                      (let ((result (car stk)))
+                        (set! stk (cdr stk))
+                        result)))
+          ((size) (length stk))
+
+          ((top-nth) (list-ref stk (car args)))
+          ((print) (for-each (lambda (element)
+                               (display element)
+                               (display " "))
+                             stk)
+                   (newline))
+          (else (error "unknown operation")))))))
+
+
+
+
+
+
+
+
+
+
+
+
+
